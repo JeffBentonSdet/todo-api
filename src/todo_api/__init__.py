@@ -19,6 +19,12 @@ def create_app(config_name=None):
     db.init_app(app)
     ma.init_app(app)
 
+    # Import models so SQLAlchemy registers them before create_all
+    import todo_api.features.todos.models  # noqa: F401
+
+    from todo_api.infrastructure.database import init_db
+    init_db(app)
+
     @app.route("/health")
     def health():
         return {"status": "ok"}
