@@ -25,6 +25,9 @@ def create_app(config_name=None):
     from todo_api.infrastructure.database import init_db
     init_db(app)
 
+    from todo_api.features.todos.rest import bp as todos_bp
+    app.register_blueprint(todos_bp)
+
     @app.route("/health")
     def health():
         return {"status": "ok"}
