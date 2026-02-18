@@ -28,6 +28,16 @@ def create_app(config_name=None):
     from todo_api.features.todos.rest import bp as todos_bp
     app.register_blueprint(todos_bp)
 
+    from todo_api.graphql import schema
+    from ariadne import graphql_sync
+    from flask import request, jsonify
+
+    @app.route("/graphql", methods=["POST"])
+    def graphql_endpoint():
+        data = request.get_json()
+        success, result = graphql_sync(schema, data, context_value={"request": request})
+        return jsonify(result), 200 if success else 400
+
     @app.route("/health")
     def health():
         return {"status": "ok"}
