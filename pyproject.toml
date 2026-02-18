@@ -1,0 +1,33 @@
+[project]
+name = "todo-api"
+version = "0.1.0"
+description = "Python/Flask backend for the todo application"
+requires-python = ">=3.12"
+dependencies = [
+    "flask>=3.1",
+    "flask-sqlalchemy>=3.1",
+    "flask-marshmallow>=1.2",
+    "marshmallow-sqlalchemy>=1.1",
+    "sqlalchemy>=2.0",
+    "marshmallow>=3.23",
+    "ariadne>=0.23",
+    "python-dotenv>=1.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=6.0",
+    "ruff>=0.9",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/todo_api"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
