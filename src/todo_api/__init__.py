@@ -1,6 +1,7 @@
 """Todo API application package. Contains the Flask application factory and top-level configuration."""
 
 import os
+from pathlib import Path
 
 from flask import Flask
 
@@ -41,5 +42,10 @@ def create_app(config_name=None):
     @app.route("/health")
     def health():
         return {"status": "ok"}
+
+    @app.route("/api/docs")
+    def openapi_spec():
+        spec_path = Path(app.root_path) / "openapi.yaml"
+        return spec_path.read_text(), 200, {"Content-Type": "application/yaml"}
 
     return app
