@@ -17,7 +17,7 @@ As a [type of user], I want [goal] so that [reason].
 ## Affected Projects
 - [ ] todo-api
 - [ ] todo-web
-- [ ] todo-docs
+- [ ] todo-project
 
 ## Additional Context
 Any other details, mockups, or references.
